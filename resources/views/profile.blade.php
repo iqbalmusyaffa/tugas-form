@@ -21,11 +21,14 @@
 
                 <ul class="navbar-nav flex-row flex-wrap">
                     <li class="nav-item col-6 col-md-auto"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-                    {{-- <liclass="nav-itemcol-6col-md-auto"><ahref="route('employees.index') " class="nav-link">Employee List</a></li>--}}
+                      {{-- Jika ada eror maka pada dibawah ini di comment --}}
+                      {{--  <li class="nav-item col-2 col-md-auto"><a href=" {{ route('employees.index')  }}" class="nav-link">Employee List</a></li> --}}
+                    <li class="nav-item col-6 col-md-auto"><a href="{{ route('employees.index') }}" class="nav-link">Employee List</a></li>
                 </ul>
 
                 <hr class="d-lg-none text-white-50">
-
+                   {{-- Jika ada eror maka pada dibawah ini di comment --}}
+                   {{-- <a href="{{ route('profile') }}" class="btn btn-outline-light my-2 ms-md-auto"><i class="bi-person-circle me-1"></i> My Profile</a> --}}
                 <a href="{{ route('profile') }}" class="btn btn-outline-light my-2 ms-md-auto"><i class="bi-person-circle me-1"></i> My Profile</a>
             </div>
         </div>
