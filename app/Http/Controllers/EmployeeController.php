@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -12,8 +13,13 @@ class EmployeeController extends Controller
     public function index()
     {
       $pageTitle = 'Employee List';
-
-      return view('employee.index', ['pageTitle' => $pageTitle]);
+      $employees = DB::select('
+      select *, employees.id as employee_id, positions.name as position_name from employees left join positions on employees.position_id = positions.id
+      ');
+      return view('employee.index', [
+        'pageTitle' => $pageTitle,
+        'employees' => $employees
+    ]);
     }
 
     /**
