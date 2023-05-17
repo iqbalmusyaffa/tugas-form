@@ -29,7 +29,8 @@ class EmployeeController extends Controller
     {
         $pageTitle = 'Create Employee';
 
-        return view('employee.create', compact('pageTitle'));
+        $positions =DB::select('select * from positions');
+        return view('employee.create', compact('pageTitle','positions'));
     }
 
     /**

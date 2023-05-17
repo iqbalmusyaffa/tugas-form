@@ -75,7 +75,7 @@
                 <label for="position" class="form-label">Age</label>
                 <select name="position" id="position" class="form-select">
                     @foreach ($positions as $position)
-                    <option value="{{ $position->id }}" {{ old('position') == $position->id? }}></option>
+
                     @endforeach
                 </select>
                 @error('age')
