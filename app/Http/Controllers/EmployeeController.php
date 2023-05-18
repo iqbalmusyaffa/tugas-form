@@ -101,6 +101,8 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('employees')->where('id', $id)->delete();
+
+        return redirect()->route('employees.index');
     }
 }
