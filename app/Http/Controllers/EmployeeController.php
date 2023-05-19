@@ -121,6 +121,7 @@ class EmployeeController extends Controller
             'age' => $request->age,
             'position_id' => $request->position,
         ]);
+        return redirect()->route('employees.index');
     }
 
     /**
