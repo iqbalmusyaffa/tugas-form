@@ -16,9 +16,13 @@ class EmployeeController extends Controller
       $employees = DB::select('
       select *, employees.id as employee_id, positions.name as position_name from employees left join positions on employees.position_id = positions.id
       ');
+      $tes = DB::table('employees')
+      ->select('*','employees.id as employee_id','positions.name as position_name' )
+      ->leftjoin('positions', 'employees.position_id', '=', 'positions.id')
+      ->get();
       return view('employee.index', [
         'pageTitle' => $pageTitle,
-        'employees' => $employees
+        'employees' => $tes
     ]);
     }
 
@@ -29,7 +33,10 @@ class EmployeeController extends Controller
     {
         $pageTitle = 'Create Employee';
 
-        $positions =DB::select('select * from positions');
+        $testing = DB::select('select * from positions');
+        $positions = DB::table('positions')
+                    ->select('*')
+                    ->get();
         return view('employee.create', compact('pageTitle','positions'));
     }
 
@@ -74,9 +81,13 @@ class EmployeeController extends Controller
         $pageTitle = 'Employee Detail';
 
         // membaca data dari database
-        $employee = collect(DB::select('select *, employees.id as employee_id, positions.name as
+        $employees = collect(DB::select('select *, employees.id as employee_id, positions.name as
         position_name from employees left join positions on employees.position_id = positions.id where employees.id = ?',[$id]))->first();
-
+        $employee = DB::table('employees')
+        ->select('*','employees.id as employee_id','positions.name as position_name' )
+        ->leftjoin('positions', 'employees.position_id', '=', 'positions.id')
+        ->where('employees.id', '=', $id)
+        ->first();
         return view('employee.show', compact('pageTitle','employee'));
     }
 
@@ -87,9 +98,12 @@ class EmployeeController extends Controller
     {
         $pageTitle = 'Employee Edit';
 
-        $employee = collect(DB::select('select *, employees.id as employee_id, positions.name as
-        position_name from employees left join positions on employees.position_id = positions.id where employees.id = ?',[$id]))->first();
-        $positions= DB::select('select * from positions');
+        $employee = DB::table('employees')
+        ->select('*','employees.id as employee_id','positions.name as position_name' )
+        ->leftjoin('positions', 'employees.position_id', '=', 'positions.id')
+        ->where('employees.id', '=', $id)
+        ->first();
+        $positions= DB::table('positions')->select('*')->get();
         return view('employee.edit',compact('pageTitle','employee','positions'));
     }
 
