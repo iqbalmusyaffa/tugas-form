@@ -76,13 +76,7 @@ class EmployeeController extends Controller
         $pageTitle = 'Employee Detail';
 
         // membaca data dari database
-        $employees = collect(DB::select('select *, employees.id as employee_id, positions.name as
-        position_name from employees left join positions on employees.position_id = positions.id where employees.id = ?',[$id]))->first();
-        $employee = DB::table('employees')
-        ->select('*','employees.id as employee_id','positions.name as position_name' )
-        ->leftjoin('positions', 'employees.position_id', '=', 'positions.id')
-        ->where('employees.id', '=', $id)
-        ->first();
+        $employee = Employee::find($id);
         return view('employee.show', compact('pageTitle','employee'));
     }
 
