@@ -65,7 +65,7 @@
                         <td>{{ $employee->lastname }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->age }}</td>
-                        <td>{{ $employee->position_name }}</td>
+                        <td>{{ $employee->position->name }}</td>
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('employees.show', ['employee'=>$employee->id]) }}" class="btn btn-outline-dark btn-sm

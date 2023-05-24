@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,10 +31,7 @@ class EmployeeController extends Controller
     {
         $pageTitle = 'Create Employee';
 
-        $testing = DB::select('select * from positions');
-        $positions = DB::table('positions')
-                    ->select('*')
-                    ->get();
+        $positions = Position::all();
         return view('employee.create', compact('pageTitle','positions'));
     }
 
@@ -60,13 +58,13 @@ class EmployeeController extends Controller
         }
 
         //Insert tabel
-        DB::table('employees')->insert([
-            'firstname' => $request->firstName,
-            'lastname' => $request->lastName,
-            'email' => $request->email,
-            'age' => $request->age,
-            'position_id' => $request->position,
-        ]);
+        $employee = New Employee;
+        $employee->firstname = $request->firstName;
+        $employee->lastname = $request->lastName;
+        $employee->email = $request->email;
+        $employee->age = $request->age;
+        $employee->position_id = $request->position;
+        $employee->save();
         return redirect()->route('employees.index');
     }
 
