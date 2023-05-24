@@ -33,10 +33,10 @@
 </nav>
 
 <div class="container-sm mt-5">
-<form action="{{ route('employees.update',['employee' => $employee->employee_id]) }}" method="POST">
+    <form action="{{ route('employees.update',['employee' => $employee->id]) }}" method="POST">
+        <input type="hidden" name="employee_id" id="employee_id" value="{{ $employee->employee_id }}">
 @method('put')
     @csrf
-    <input type="hidden" name="employees_id" id="employee_id" value="{{ $employee->employee_id }}">
 <div class="row justify-content-center">
     <div class="p-5 bg-light rounded-3 border col-xl-6">
         <div class="mb-3 text-center">
@@ -47,28 +47,28 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="firstName" class="form-label">First Name</label>
-                <input class="form-control @error('firstName') is-invalid @enderror" type="text" name="firstName" id="firstName" value="{{ $employee->firstname }}" placeholder="Enter First Name">
+                <input class="form-control @error('firstName') is-invalid @enderror" type="text" name="firstName" id="firstName" value="{{ $errors->any() ? old('firstName') : $employee->firstname }}" placeholder="Enter First Name">
                 @error('firstName')
             <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
         </div>
             <div class="col-md-6 mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input class="form-control @error('lastName') is-invalid @enderror" type="text" name="lastName" id="lastName" value="{{ $employee->lastname }}" placeholder="Enter Last Name">
+                <input class="form-control @error('lastName') is-invalid @enderror" type="text" name="lastName" id="lastName" value="{{ $errors->any() ? old('lastName') : $employee->lastname }}" placeholder="Enter Last Name">
                 @error('lastName')
             <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-md-6 mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" id="email" value="{{ $employee->email }}" placeholder="Enter Email">
+                <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" id="email" value="{{ $errors->any() ? old('email') : $employee->email }}" placeholder="Enter Email">
                 @error('email')
                 <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
             </div>
             <div class="col-md-6 mb-3">
                 <label for="age" class="form-label">Age</label>
-                <input class="form-control @error('age') is-invalid @enderror" type="text" name="age" id="age" value="{{ $employee->age }}" placeholder="Enter Age">
+                <input class="form-control @error('age') is-invalid @enderror" type="text" name="age" id="age" value="{{ $errors->any() ? old('age') : $employee->age }}" placeholder="Enter Age">
                 @error('age')
                 <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
