@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Employee;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,16 +15,11 @@ class EmployeeController extends Controller
     public function index()
     {
       $pageTitle = 'Employee List';
-      $employees = DB::select('
-      select *, employees.id as employee_id, positions.name as position_name from employees left join positions on employees.position_id = positions.id
-      ');
-      $tes = DB::table('employees')
-      ->select('*','employees.id as employee_id','positions.name as position_name' )
-      ->leftjoin('positions', 'employees.position_id', '=', 'positions.id')
-      ->get();
+      $employees = Employee::all();
+
       return view('employee.index', [
         'pageTitle' => $pageTitle,
-        'employees' => $tes
+        'employees' => $employees
     ]);
     }
 
