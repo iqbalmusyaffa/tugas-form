@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +22,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', [HomeController::class, 'index'])->name('home');
+Auth::routes();
 
-Route::get('profile', ProfileController::class)->name('profile');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('employees', EmployeeController::class);
+// Route::get('/logout', function () {
+//     Auth::logout();
+
+//     return redirect('/login');
+// });
+Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::get('/logout', function () {
+//     // Only authenticated users may access this route...
+// })->middleware('auth');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('profile', ProfileController::class)->name('profile');
+    Route::resource('employees', EmployeeController::class);
+});
