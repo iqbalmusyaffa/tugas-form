@@ -8,7 +8,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<section class="vh-100" style="background-color: #508bfc;">
+<section class="vh-100" style="background-color: #0059ff;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -42,13 +42,7 @@
                                 @enderror
             </div>
 
-            <!-- Checkbox -->
-            <div class="form-check d-flex justify-content-start mb-4">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-              <label class="form-check-label" for="form1Example3"> Remember password </label>
-            </div>
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit"> {{ __('Login') }}</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit"><i class="bi bi-box-arrow-in-right">{{ __('Login') }}</i></button>
 
           </div>
         </div>
